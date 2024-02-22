@@ -3,14 +3,19 @@
 #include <ctime>
 #include <chrono>
 #include <thread>
+// #include<windows.h>
+#include <filesystem> 
+#include <fstream> 
 
 using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
 
+
 using namespace std::this_thread; // sleep_for, sleep_until
 using namespace std::chrono; // nanoseconds, system_clock, seconds
+using namespace std::filesystem; 
 
 void password_generator_text() {
   cout << "\n#####   #    ##### ##### #   #   #  ######  ######  ####       ######  #####  ##   #  #####  # ###     #   #######  ######  ######" << endl;
@@ -45,7 +50,7 @@ int get_ASII_number() {
   if(rand_num == 0){
     get_ASII_number();
   }
-  cout << rand_num << endl;
+  // cout << rand_num << endl;
   return rand_num;
 }
 
@@ -79,12 +84,23 @@ int main() {
 
   string s1 = "";
 
-  while (s1.length() < 14) {
+  string web_name = "";
+
+  cout << "Enter website name: ";
+  cin >> web_name;
+
+  cout << "What is the desired length of the password ? " ;
+
+  int pass_length = 12;
+  cin >> pass_length;
+
+  while (s1.length() < pass_length) {
     string newCharacter = get_character();
     s1.append(newCharacter);
   }
 
-  cout << "Generated password: " << s1 << endl;
+  cout << "Generated password: " << endl;
+  cout << "password: " << s1;
 
   /////////// Fix logic below this
 
@@ -101,6 +117,32 @@ int main() {
   
   if(keep_password == "y" || keep_password == "Y"){
     cout << "you have chosen to keep it.";
+    // CreateDirectory("C:\\Users\\jlbur\\OneDrive\\Desktop\\donut-p",NULL);
+    path directorypath = "C:\\Users\\jlbur\\OneDrive\\Desktop\\donut_pass"; 
+
+    // To check if the directory exist or not, create it if 
+    // doesn't exist 
+    if (!exists(directorypath)) { 
+        create_directory(directorypath); 
+        cout << "Directory created: " << directorypath 
+             << endl; 
+    } 
+    
+    path filepath = directorypath / "myPass.txt"; 
+
+   std::ofstream file(filepath);
+
+   if (file.is_open()) { 
+        // Write data to the file 
+        file << "website:" << web_name << endl << "password:" << s1; 
+        file.close(); 
+        cout << "File created: " << filepath << endl; 
+    } 
+    else { 
+        // Handle the case if any error occured 
+        std::cerr << "Failed to create file: " << filepath 
+             << endl; 
+    }
   }else{
     cout << "invalid response";
   };
