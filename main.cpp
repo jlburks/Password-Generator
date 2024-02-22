@@ -18,12 +18,7 @@ using namespace std::chrono; // nanoseconds, system_clock, seconds
 using namespace std::filesystem; 
 
 void password_generator_text() {
-  cout << "\n#####   #    ##### ##### #   #   #  ######  ######  ####       ######  #####  ##   #  #####  # ###     #   #######  ######  ######" << endl;
-  cout << "#   #  # #   #     #     #   #   #  #    #  #    #  #   #      #       #      # #  #  #      #    #   # #     #     #    #  #    #" << endl;
-  cout << "##### #####  ##### ##### #   #   #  #    #  ######  #    #     #  # #  #####  #  # #  #####  ######  #####    #     #    #  ######" << endl;
-  cout << "#     #   #      #     #  # # # #   #    #  #   #   #   #      #    #  #      #   ##  #      #   #   #   #    #     #    #  #   #" << endl;
-  cout << "#     #   #  ##### #####   #   #    ######  #    #  ####       ######  #####  #    #  #####  #    #  #   #    #     ######  #    #"  << endl;
-  cout << "\n######################################################################################################################################\n" << endl;
+  cout << "PASSWORD GENERATOR !!!\n";
 }
 
 
@@ -89,7 +84,7 @@ int main() {
   cout << "Enter website name: ";
   cin >> web_name;
 
-  cout << "What is the desired length of the password ? " ;
+  cout << "What is the desired length of the password? " ;
 
   int pass_length = 12;
   cin >> pass_length;
@@ -99,8 +94,8 @@ int main() {
     s1.append(newCharacter);
   }
 
-  cout << "Generated password: " << endl;
-  cout << "password: " << s1;
+  cout << "Generating password*** " << endl;
+  cout << "password: " << s1 << endl;
 
   /////////// Fix logic below this
 
@@ -111,7 +106,7 @@ int main() {
   cin >> keep_password;
 
   if(keep_password == "n" || keep_password == "N"){
-    cout << "redoing password, please wait\n";
+    cout << "redoing password, please wait\n\n";
     main();
   };
   
@@ -134,7 +129,7 @@ int main() {
 
    if (file.is_open()) { 
         // Write data to the file 
-        file << "website:" << web_name << endl << "password:" << s1; 
+        file << "website: " << web_name << endl << "password: " << s1; 
         file.close(); 
         cout << "File created: " << filepath << endl; 
     } 
